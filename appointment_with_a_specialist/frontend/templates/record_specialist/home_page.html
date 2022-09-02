@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends 'base_pattern.html' %}
+
+{% block content %}
+    <h2>Запись к специалисту</h2>
+    <form class="form" method="get" action="{% url 'home_page' %}">
+        <input type="date" required name="start_date">
+        <input type="date" required name="end_date">
+        <button class="button" type="submit">Фильтровать</button>
+    </form>
+{% endblock content%}
+
+{% block forms %}
+    {% for record in dict_response %}
+        {% if record.status == 'free'%}
+            <form class="form" method="post" action="{% url 'home_page' %}">
+                {% csrf_token %}
+                    <input type="hidden" name="id_record" value="{{record.id}}">
+                    <input type="hidden"  name="name_specialist" value="{{record.name_specialist}}" >
+                    <input  type="hidden"  name="registrarion_date" value="{{record.registrarion_date}}">
+                <button class="button" type="submit">
+                    <p>Специалист - {{record.name_specialist}}</p>
+                    <p>Время записи - {{record.registrarion_date}}</p>
+                </button>
+            </form>
+        {%else%}
+                <form class="form" method="post" action="{% url 'delete_pattern_record' %}">
+                {% csrf_token %}
+                    <input type="hidden"  name="id_record" value="{{record.id}}">
+                    <input type="hidden"  name="name_specialist" value="{{record.name_specialist}}">
+                    <input type="hidden"  name="registrarion_date" value="{{record.registrarion_date}}">
+                <button class="button_end" type="submit">
+                    <p>Специалист - {{record.name_specialist}}</p>
+                    <p>Время записи - {{record.registrarion_date}}</p>
+                </button>
+                </form>
+        {%endif%}
+    <hr>
+    {%endfor%}
+
+{% endblock forms%}

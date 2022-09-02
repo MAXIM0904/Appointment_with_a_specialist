@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends 'base_pattern.html' %}
+
+{% block content %}
+    <h2>Форма записи к специалисту</h2>
+{% endblock content%}
+
+{% block forms %}
+    {% if dict_response%}
+    <form class="form" method="post" action="{% url 'user_record' %}">
+        {% csrf_token %}
+        <p>Специалист - {{dict_response.name_specialist}}</p>
+        <p>Время записи - {{dict_response.registrarion_date}}</p>
+        <p>ФИО: <input required name="name_client" size="30" type="text"></p>
+        <p>Номер телефона: <input required name="phone" size="30" type="tel"></p>
+        <p>Текст сообщения: <input name="message_text" size="30" type="text"></p>
+        <input type="hidden"  name="time" value="{{dict_response.id_record}}">
+        <button class="button" type="submit">
+            Записаться
+        </button>
+    </form>
+    {%endif%}
+    
+{% endblock forms%}

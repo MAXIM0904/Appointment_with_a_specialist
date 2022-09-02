@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% extends 'base_pattern.html' %}
+
+
+{% block content %}
+    <h2>Удалить запись</h2>
+{% endblock content%}
+
+{% block forms %}
+<p>Вы удаляете запись к {{dict_response.name_specialist}} на {{dict_response.registrarion_date}}</p>
+
+    <form class="form" method="post" action="{% url 'delete_record' %}">
+        {% csrf_token %}
+        <p>Номер телефона - <input required name="phone" size="30" type="tel"></p>
+        <input type="hidden"  name="time" value="{{dict_response.id_record}}">
+        <button class="button" type="submit">
+            Отменить
+        </button>
+    </form>
+{% endblock forms%}

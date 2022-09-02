@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    {% block head %}
+    <link type="text/css" href="../../../static/frontend/css/base_pattern/normalize.css" rel="stylesheet" />
+    <link type="text/css" href="../../../static/frontend/css/base_pattern/styles.css" rel="stylesheet" />
+    {% endblock head %}
+</head>
+
+<body>
+    <div class="container_block_menu">
+        {% block menu %}
+        <a class="index_link_logo" href="{% url 'home_page' %}">
+                <img class="index_logo" src="../../static/frontend/images/logo.jpg" alt="Логотип организации">
+        </a>
+
+        <div class="container_menu">
+            <a class="index_menu" href="{% url 'logging' %}">Вход</a>
+        </div>
+        {% endblock menu %}
+    </div>
+
+    <div class="container_block_content">
+        {% block content %}
+        {% endblock content%}
+    </div>
+
+    <div class="container_forms">
+        {% block forms %}
+        {% endblock forms%}
+    </div>
+
+    <div class="container_footer">
+        {% block footer %}
+        {% endblock footer%}
+    </div>
+
+</body>
+</html>
